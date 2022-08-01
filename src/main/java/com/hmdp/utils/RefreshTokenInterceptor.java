@@ -15,11 +15,13 @@ import java.util.concurrent.TimeUnit;
  * @author XTY~
  * @version 1.0
  * @Date: 2022-07-25 10:06
- * @Description: 拦截器
+ * @Description: 用于刷新token的拦截器
  */
 public class RefreshTokenInterceptor implements HandlerInterceptor
 {
-    // 使用构造方法注入redis
+    /**
+     * 使用构造方法注入redis
+     */
     private StringRedisTemplate stringRedisTemplate;
 
     public RefreshTokenInterceptor(StringRedisTemplate stringRedisTemplate)
