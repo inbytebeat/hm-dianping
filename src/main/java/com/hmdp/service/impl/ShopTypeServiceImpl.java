@@ -35,11 +35,11 @@ public class ShopTypeServiceImpl extends ServiceImpl<ShopTypeMapper, ShopType> i
     @Override
     public Result queryList()
     {
-        // 查询redis中的有关商铺类型的所有数据 以list形式返回
+        // 先查询redis中的有关商铺类型的所有数据 看在redis缓存中有没有 如果有，则以list形式返回
         List<String> shopTypeListData = stringRedisTemplate.opsForList().range(RedisConstants.CACHE_SHOPlist_KEY, 0, -1);
         if (!shopTypeListData.isEmpty())
         {
-            // 如果商铺类型不为空 则依次将string类型的商铺种类数据转换成为ShopType类型存入list返回给前端
+            // 如果redis存有数据 则依次将string类型的商铺种类数据转换成为ShopType类型存入list返回给前端
             List<ShopType> shopTypeList = new ArrayList<>();
                 for (String data : shopTypeListData) {
                     shopTypeList.add(JSONUtil.toBean(data,ShopType.class));
